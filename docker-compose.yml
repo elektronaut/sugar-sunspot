@@ -1,0 +1,20 @@
+version: '2.4'
+
+services:
+  solr:
+    image: solr:8
+    ports:
+      - 8983:8983
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/
+      - solr:/var/solr
+    # healthcheck:
+    #   test: >-
+    #     curl -s -A 'healthcheck'  http://localhost:8983/solr/test/admin/ping?wt=json \
+    #     | grep -q '"status":"OK"'
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
+
+volumes:
+  solr:
